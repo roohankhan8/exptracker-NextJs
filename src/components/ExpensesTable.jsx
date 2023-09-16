@@ -1,9 +1,7 @@
-
-
 const ExpensesTable = ({ title, children }) => {
     return (
         <>
-            <h1 className='text-center'>{title}</h1>
+            <h1 className='text-center mt-4 text-xl p-2 font-bold'>{title}</h1>
             <table className="border-2 w-full text-center">
                 <thead className="border-2">
                     <tr>

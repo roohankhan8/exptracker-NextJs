@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddExpense = () => {
     const router = useRouter()
@@ -13,6 +15,7 @@ const AddExpense = () => {
     })
     const addExpense = async () => {
         console.log(exp)
+        showToastMessage()
         if (exp.amount > 0) {
             // if (exp.category == '' && exp.typeOfExp == '') {
             //     console.log('chala')
@@ -22,51 +25,129 @@ const AddExpense = () => {
             router.push('/')
         }
     }
+    const showToastMessage = () => {
+        if (exp.amount > 0) {
+            toast.success('Expense Added!', {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        }
+        else {
+            toast.error('Add Amount!', {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        }
+    };
     const switchType = (e) => {
         if (e === 'income') {
-            setexp(prevExp => ({ ...prevExp, category: e, typeOfExp: "salary" }))
+            setexp(prevExp => ({ ...prevExp, category: e, typeOfExp: 'salary' }))
         } else if (e === 'expense') {
-            setexp(prevExp => ({ ...prevExp, category: e, typeOfExp: "food" }))
+            setexp(prevExp => ({ ...prevExp, category: e, typeOfExp: 'food' }))
         }
     }
     const showType = () => {
         if (exp.category == '' || exp.category == 'expense') {
+            console.log(exp.category)
             console.log(exp.typeOfExp)
             return (
-                <select name="typeOfExp" id="typeOfExp expSelect" className="border-2 p-2" onChange={(e) => { setexp({ ...exp, typeOfExp: e.target.value }) }}>
-                    <option selected value="food">Food</option>
-                    <option value="transportation">Transportation</option>
-                    <option value="others">Others</option>
-                </select>
+                <>
+                    <div>
+                        <input
+                            type="radio"
+                            id="food"
+                            name="typeOfExp"
+                            value="food"
+                            checked={exp.typeOfExp === "food"}
+                            onChange={(e) => { setexp({ ...exp, typeOfExp: e.target.value }) }}
+                        />
+                        <label htmlFor="food">Food</label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="transportation"
+                            name="typeOfExp"
+                            value="transportation"
+                            checked={exp.typeOfExp === "transportation"}
+                            onChange={(e) => { setexp({ ...exp, typeOfExp: e.target.value }) }}
+                        />
+                        <label htmlFor="transportation">Transportation</label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="others"
+                            name="typeOfExp"
+                            value="others"
+                            checked={exp.typeOfExp === "others"}
+                            onChange={(e) => { setexp({ ...exp, typeOfExp: e.target.value }) }}
+                        />
+                        <label htmlFor="others">Others</label>
+                    </div>
+                </>
             )
         }
         else {
+            console.log(exp.category)
             console.log(exp.typeOfExp)
             return (
-                <select name="typeOfExp" id="typeOfExp" className="border-2 p-2" onChange={(e) => { setexp({ ...exp, typeOfExp: e.target.value }) }}>
-                    <option selected value="salary">Salary</option>
-                    <option value="bonus">Bonus</option>
-                    <option value="allowance">Allowance</option>
-                </select>
+                <>
+                    <div>
+                        <input
+                            type="radio"
+                            id="salary"
+                            name="typeOfExp"
+                            value="salary"
+                            checked={exp.typeOfExp === "salary"}
+                            onChange={(e) => { setexp({ ...exp, typeOfExp: e.target.value }) }}
+                        />
+                        <label htmlFor="salary">Salary</label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="bonus"
+                            name="typeOfExp"
+                            value="bonus"
+                            checked={exp.typeOfExp === "bonus"}
+                            onChange={(e) => { setexp({ ...exp, typeOfExp: e.target.value }) }}
+                        />
+                        <label htmlFor="bonus">Bonus</label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="allowance"
+                            name="typeOfExp"
+                            value="allowance"
+                            checked={exp.typeOfExp === "allowance"}
+                            onChange={(e) => { setexp({ ...exp, typeOfExp: e.target.value }) }}
+                        />
+                        <label htmlFor="allowance">Allowance</label>
+                    </div>
+                </>
             )
         }
     }
     return (
-        <div className="flex flex-col justify-center items-center border-2 p-2">
-            <select name="category" id="category firstSelect" className="border-2 p-2" onChange={(e) => switchType(e.target.value)}>
-                <option value="expense">Expense</option>
-                <option value="income">Income</option>
-            </select>
-            <div>
-                {showType()}
+        <div className="flex justify-center items-center h-screen">
+            <div className="flex flex-col items-center justify-center p-2" id="addExpContainer" >
+                <h1 className="text-2xl font-bold my-2">Add Expense</h1>
+                <select name="category" id="category" className="border-2 p-2 w-full" onChange={(e) => switchType(e.target.value)}>
+                    <option value="expense">Expense</option>
+                    <option value="income">Income</option>
+                </select>
+                <div id="radioTypes" className="flex items-center justify-around p-2 w-full">
+                    {showType()}
+                    {/* <ShowType exp={exp} /> */}
+                </div>
+                <input required onChange={(e) => { setexp({ ...exp, amount: parseFloat(e.target.value) }) }} type="number" name="amount" id="amount" placeholder="Amount" className="border p-2 w-full" />
+                <textarea onChange={(e) => { setexp({ ...exp, note: e.target.value }) }} name="note" placeholder="Note" id="" cols="30" rows="3" className="border-2 p-2"></textarea>
+                <div className="flex justify-between w-full my-2" id="options" >
+                    <button className=" bg-red-700" onClick={() => { router.push('/') }}>Cancel</button>
+                    <button type="submit" className=" bg-blue-700" onClick={addExpense} >Add</button>
+                </div>
+                <ToastContainer />
             </div>
-            <input onChange={(e) => { setexp({ ...exp, amount: parseFloat(e.target.value) }) }} type="number" name="amount" id="amount" placeholder="Amount" className="border p-2" />
-            <textarea onChange={(e) => { setexp({ ...exp, note: e.target.value }) }} name="note" placeholder="Note" id="" cols="30" rows="10" className="border-2 p-2"></textarea>
-            <div className="flex justify-between border-2 w-full">
-                <button className=" bg-red-700 text-white p-2 rounded-lg">Cancel</button>
-                <button className=" bg-blue-700 text-white p-2 rounded-lg" onClick={addExpense}>Add</button>
-            </div>
-
         </div>
     )
 }

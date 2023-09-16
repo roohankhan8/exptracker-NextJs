@@ -1,14 +1,23 @@
 'use client'
 import axios from "axios"
+import Link from "next/link"
 import { useState } from "react"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { ExpensesTable, GetTotal } from "."
-import Link from "next/link"
+import { ExpensesTable, GetTotal, Popup, Logout } from "."
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Expenses = () => {
     const router = useRouter()
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [expenses, setexpenses] = useState([])
+    const [editExp, seteditExp] = useState({
+        category: 'expense',
+        typeOfExp: 'food',
+        amount: 0.00,
+        note: ''
+    })
     useEffect(() => {
         getExpenses()
     }, [])
@@ -26,16 +35,128 @@ const Expenses = () => {
     const deleteExp = async (_id) => {
         try {
             const response = await axios.delete(
-                `/api/deleteExp?expId=${_id}`
+                `/api/deleteExp?expId=Rs.{_id}`
             );
-            console.log('hogya')
+            showToastMessage()
             getExpenses()
         } catch (error) {
             console.log(error.message);
         }
     }
+    const openPopup = (expense) => {
+        seteditExp(expense);
+        setIsPopupOpen(true);
+    };
+    const switchType = (e) => {
+        if (e === 'income') {
+            seteditExp(prevExp => ({ ...prevExp, category: e, typeOfExp: "salary" }))
+        } else if (e === 'expense') {
+            seteditExp(prevExp => ({ ...prevExp, category: e, typeOfExp: "food" }))
+        }
+    }
+    const updateNoteHandler = async () => {
+        try {
+            console.log(editExp)
+            const res = await axios.put('/api/updateExp', editExp)
+            getExpenses()
+            setIsPopupOpen(false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const showToastMessage = () => {
+        toast.info('Expense Deleted!', {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    };
+
+    const showType = () => {
+        if (editExp.category == '' || editExp.category == 'expense') {
+            console.log(editExp.category)
+            console.log(editExp.typeOfExp)
+            return (
+                <>
+                    <div>
+                        <input
+                            type="radio"
+                            id="food"
+                            name="typeOfExp"
+                            value="food"
+                            checked={editExp.typeOfExp === "food"}
+                            onChange={(e) => { seteditExp({ ...editExp, typeOfExp: e.target.value }) }}
+                        />
+                        <label htmlFor="food">Food</label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="transportation"
+                            name="typeOfExp"
+                            value="transportation"
+                            checked={editExp.typeOfExp === "transportation"}
+                            onChange={(e) => { seteditExp({ ...editExp, typeOfExp: e.target.value }) }}
+                        />
+                        <label htmlFor="transportation">Transportation</label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="others"
+                            name="typeOfExp"
+                            value="others"
+                            checked={editExp.typeOfExp === "others"}
+                            onChange={(e) => { seteditExp({ ...editExp, typeOfExp: e.target.value }) }}
+                        />
+                        <label htmlFor="others">Others</label>
+                    </div>
+                </>
+            )
+        }
+        else {
+            console.log(editExp.category)
+            console.log(editExp.typeOfExp)
+            return (
+                <>
+                    <div>
+                        <input
+                            type="radio"
+                            id="salary"
+                            name="typeOfExp"
+                            value="salary"
+                            checked={editExp.typeOfExp === "salary"}
+                            onChange={(e) => { seteditExp({ ...editExp, typeOfExp: e.target.value }) }}
+                        />
+                        <label htmlFor="salary">Salary</label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="bonus"
+                            name="typeOfExp"
+                            value="bonus"
+                            checked={editExp.typeOfExp === "bonus"}
+                            onChange={(e) => { seteditExp({ ...editExp, typeOfExp: e.target.value }) }}
+                        />
+                        <label htmlFor="bonus">Bonus</label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="allowance"
+                            name="typeOfExp"
+                            value="allowance"
+                            checked={editExp.typeOfExp === "allowance"}
+                            onChange={(e) => { seteditExp({ ...editExp, typeOfExp: e.target.value }) }}
+                        />
+                        <label htmlFor="allowance">Allowance</label>
+                    </div>
+                </>
+            )
+        }
+    }
     return (
-        <div>
+        <>
+        <Logout/>
             <div className="m-2">
                 <Link href='/addExpense' className="">
                     <button className="w-full bg-slate-900 text-white text-lg rounded-lg p-2">
@@ -51,12 +172,12 @@ const Expenses = () => {
                 {expenses.slice().reverse().map((expense) => (
                     <>
                         {expense.category == 'expense' ? (
-                            <tr key={expense._id} className="border-2 text-sm">
-                                <td>{expense?.typeOfExp}</td>
-                                <td>${expense?.amount}</td>
+                            <tr key={expense._id} className=" text-sm">
+                                <td className="" >{expense?.typeOfExp}</td>
+                                <td>Rs.{expense?.amount}</td>
                                 <td>{dateFormat(expense.dateCreated)}</td>
                                 <td className="flex justify-around items-center">
-                                    <button className="text-sm">
+                                    <button className="text-sm" onClick={() => openPopup(expense)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                         </svg>
@@ -78,12 +199,12 @@ const Expenses = () => {
                 {expenses.slice().reverse().map((expense) => (
                     <>
                         {expense.category == 'income' ? (
-                            <tr key={expense._id} className="border-2 text-sm">
+                            <tr key={expense._id} className=" text-sm">
                                 <td>{expense?.typeOfExp}</td>
-                                <td>${expense?.amount}</td>
+                                <td>Rs.{expense?.amount}</td>
                                 <td>{dateFormat(expense.dateCreated)}</td>
                                 <td className="flex justify-around items-center">
-                                    <button className="text-sm">
+                                    <button className="text-sm" onClick={() => openPopup(expense)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                         </svg>
@@ -101,7 +222,25 @@ const Expenses = () => {
                     </>
                 ))}
             </ExpensesTable>
-        </div>
+            <Popup isOpen={isPopupOpen}>
+                <div className="flex flex-col m-2 rounded-lg overflow-hidden ">
+                    <select value={editExp.category} name="category" id="category" className=" p-2 w-full" onChange={(e) => switchType(e.target.value)}>
+                        <option value="expense">Expense</option>
+                        <option value="income">Income</option>
+                    </select>
+                    <div id="radioTypes" className="flex items-center justify-around p-2 w-full">
+                        {showType()}
+                    </div>
+                    <input className=" p-2 text-white" type="number" value={editExp.amount} onChange={(e) => seteditExp({ ...editExp, amount: e.target.value })} />
+                    <textarea className=" p-2 text-white" defaultValue={editExp.note} placeholder="Your Note here..." onChange={(e) => seteditExp({ ...editExp, description: e.target.value })} name="desc" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div className="flex justify-between text-white p-2" id="options">
+                    <button className=" bg-red-700" onClick={() => setIsPopupOpen(false)}>Cancel</button>
+                    <button type="submit" className=" bg-blue-700" onClick={updateNoteHandler}>Done</button>
+                </div>
+            </Popup>
+            <ToastContainer />
+        </>
     )
 }
 
