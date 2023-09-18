@@ -11,7 +11,7 @@ const AddExpense = () => {
     const { data: session } = useSession()
     const router = useRouter()
     const [exp, setexp] = useState({
-        userEmail: session.user.email,
+        userEmail: session?.user?.email,
         category: 'expense',
         typeOfExp: 'food',
         amount: 0.00,
