@@ -8,7 +8,6 @@ function PieChart({ data }) {
   useEffect(() => {
     if (chartRef.current) {
       const ctx = chartRef.current.getContext('2d');
-      
       new Chart(ctx, {
         type: 'pie',
         data: {
@@ -22,7 +21,7 @@ function PieChart({ data }) {
         },
       });
     }
-  }, [data]);
+  }, []);
 
   return <canvas ref={chartRef} />;
 }
