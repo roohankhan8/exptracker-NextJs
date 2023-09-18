@@ -4,8 +4,8 @@ import PieChart from "./PieChart";
 import GetTotal from "./GetTotal";
 import ExpensesTable from "./ExpensesTable";
 import Popup from "./PopUp";
-import ShowType from "./ShowType";
 import Logout from "./Logout";
+import Navbar from "./Navbar";
 
 export {
   AddExpense,
@@ -14,6 +14,6 @@ export {
   GetTotal,
   ExpensesTable,
   Popup,
-  ShowType,
   Logout,
+  Navbar,
 };

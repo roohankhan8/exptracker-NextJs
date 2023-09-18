@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const expSchema = new mongoose.Schema({
+  userEmail: {
+    type: String,
+    required: true,
+  },
   category: {
     type: String,
     required: true,
@@ -16,10 +20,6 @@ const expSchema = new mongoose.Schema({
   note: {
     type: String,
   },
-  //   userId: {
-  //     type: String,
-  //     required: true,
-  //   },
   dateCreated: {
     type: Date,
     default: Date.now,

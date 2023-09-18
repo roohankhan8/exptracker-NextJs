@@ -2,12 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+#flex {
+  @apply flex justify-center items-center;
+}
+
 tr > td,
 tr > th {
   @apply p-1.5;
 }
-#addExpContainer{
-  @apply shadow-lg shadow-black rounded-lg p-10
+#addExpContainer {
+  @apply shadow-lg shadow-black rounded-lg p-10;
 }
 
 #addExpContainer input,
@@ -20,7 +24,7 @@ tr > th {
 }
 
 #options button {
-  @apply text-white p-2 rounded-lg shadow-md hover:shadow-black hover:scale-105
+  @apply text-white p-2 rounded-lg shadow-md hover:shadow-black hover:scale-105;
 }
 
 .popup {
@@ -48,6 +52,8 @@ tr > th {
   @apply m-1;
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
   outline: none;
 }

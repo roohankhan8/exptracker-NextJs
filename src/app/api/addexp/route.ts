@@ -7,9 +7,10 @@ connect();
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
-    const { category, typeOfExp, amount, note } = reqBody;
+    const { userEmail, category, typeOfExp, amount, note } = reqBody;
     console.log(reqBody);
     const newExpense = new Expense({
+      userEmail,
       category,
       typeOfExp,
       amount,

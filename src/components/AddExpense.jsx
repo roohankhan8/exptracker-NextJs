@@ -1,13 +1,17 @@
 'use client'
+import axios from "axios"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import axios from "axios"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSession } from "next-auth/react"
+import { showToastMessage } from "@/helpers";
 
 const AddExpense = () => {
+    const { data: session } = useSession()
     const router = useRouter()
     const [exp, setexp] = useState({
+        userEmail: session.user.email,
         category: 'expense',
         typeOfExp: 'food',
         amount: 0.00,
@@ -15,28 +19,14 @@ const AddExpense = () => {
     })
     const addExpense = async () => {
         console.log(exp)
-        showToastMessage()
         if (exp.amount > 0) {
-            // if (exp.category == '' && exp.typeOfExp == '') {
-            //     console.log('chala')
-            //     setexp(prevExp => ({ ...prevExp, category: 'expense', typeOfExp: "food" }))
-            // }
+            showToastMessage('add')
             const res = await axios.post('/api/addexp', exp)
             router.push('/')
+        } else {
+            showToastMessage('invalid amount')
         }
     }
-    const showToastMessage = () => {
-        if (exp.amount > 0) {
-            toast.success('Expense Added!', {
-                position: toast.POSITION.TOP_RIGHT
-            });
-        }
-        else {
-            toast.error('Add Amount!', {
-                position: toast.POSITION.TOP_RIGHT
-            });
-        }
-    };
     const switchType = (e) => {
         if (e === 'income') {
             setexp(prevExp => ({ ...prevExp, category: e, typeOfExp: 'salary' }))
@@ -46,8 +36,6 @@ const AddExpense = () => {
     }
     const showType = () => {
         if (exp.category == '' || exp.category == 'expense') {
-            console.log(exp.category)
-            console.log(exp.typeOfExp)
             return (
                 <>
                     <div>
@@ -87,8 +75,6 @@ const AddExpense = () => {
             )
         }
         else {
-            console.log(exp.category)
-            console.log(exp.typeOfExp)
             return (
                 <>
                     <div>
@@ -138,7 +124,6 @@ const AddExpense = () => {
                 </select>
                 <div id="radioTypes" className="flex items-center justify-around p-2 w-full">
                     {showType()}
-                    {/* <ShowType exp={exp} /> */}
                 </div>
                 <input required onChange={(e) => { setexp({ ...exp, amount: parseFloat(e.target.value) }) }} type="number" name="amount" id="amount" placeholder="Amount" className="border p-2 w-full" />
                 <textarea onChange={(e) => { setexp({ ...exp, note: e.target.value }) }} name="note" placeholder="Note" id="" cols="30" rows="3" className="border-2 p-2"></textarea>
