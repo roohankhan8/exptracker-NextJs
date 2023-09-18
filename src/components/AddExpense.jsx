@@ -116,7 +116,7 @@ const AddExpense = () => {
     }
     return (
         <div className="flex justify-center items-center h-screen">
-            <div className="flex flex-col items-center justify-center p-2" id="addExpContainer" >
+            <div className="flex bg-slate-900 flex-col items-center justify-center p-2" id="addExpContainer" >
                 <h1 className="text-2xl font-bold my-2">Add Expense</h1>
                 <select name="category" id="category" className="border-2 p-2 w-full" onChange={(e) => switchType(e.target.value)}>
                     <option value="expense">Expense</option>

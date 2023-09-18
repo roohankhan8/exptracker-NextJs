@@ -13,9 +13,9 @@ const GetTotal = ({ expenses }) => {
         }
         total = incTotal - expTotal
         return (
-            <>
-                <h1 className='text-center mt-2 text-xl p-2 font-bold'>Overview</h1>
-                <table className="w-full text-center border-2">
+            <div id="boxes" className=" p-2 my-4 shadow-md shadow-black rounded-lg m-2">
+                <h1 className='text-center text-xl p-2 font-bold'>Overview</h1>
+                <table className="w-full text-center">
                     <thead>
                         <tr className="border-2">
                             <th>Income</th>
@@ -31,7 +31,7 @@ const GetTotal = ({ expenses }) => {
                         </tr>
                     </tbody>
                 </table>
-            </>
+            </div>
         )
     }
     return (

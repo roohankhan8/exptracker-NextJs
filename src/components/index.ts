@@ -6,6 +6,7 @@ import ExpensesTable from "./ExpensesTable";
 import Popup from "./PopUp";
 import Logout from "./Logout";
 import Navbar from "./Navbar";
+import Months from './Months'
 
 export {
   AddExpense,
@@ -15,5 +16,5 @@ export {
   ExpensesTable,
   Popup,
   Logout,
-  Navbar,
+  Navbar, Months
 };

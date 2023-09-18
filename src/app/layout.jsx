@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function RootLayout({children, session}) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-slate-800 text-white`}>
+      <body className={`${inter.className} bg-slate-700 text-white`}>
         <SessionProvider session={session}>
           {children}
         </SessionProvider>

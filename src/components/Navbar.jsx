@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const Navbar = ({image}) => {
     return (
-        <div>
+        <div className=' bg-slate-800'>
             <div className="flex justify-between items-center p-2">
                 <Logout />
                 <h1 className=' text-xl font-bold' >Expense Tracker</h1>
