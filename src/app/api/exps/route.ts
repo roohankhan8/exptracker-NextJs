@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { connect } from "@/dbConfig/dbConfig";
 import { NextResponse, NextRequest } from "next/server";
 import Expense from "@/models/expenseModel";
@@ -7,9 +9,8 @@ connect();
 
 export async function GET(request: NextRequest) {
   try {
-    const reqQuery = new NextURL(request.url).searchParams;
+    const reqQuery = new NextURL(request?.url).searchParams;
     const userEmail = reqQuery.get("userEmail");
-    console.log(userEmail);
     const expenses = await Expense.find({ userEmail: userEmail });
     return NextResponse.json({
       mesaaage: "User found",

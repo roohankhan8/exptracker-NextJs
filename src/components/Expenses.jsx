@@ -151,7 +151,7 @@ const Expenses = () => {
                 </Link>
             </div>
             <div className="m-2">
-
+            <Link href={`/charts`}>Charts</Link>
             {/* <Months/> */}
             </div>
             {expenses.length > 0 ? (

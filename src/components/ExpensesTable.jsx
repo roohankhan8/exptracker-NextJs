@@ -1,4 +1,3 @@
-
 import { dateFormat, showToastMessage } from '@/helpers'
 
 const ExpensesTable = ({ title, expenses, category, children }) => {
