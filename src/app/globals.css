@@ -61,3 +61,7 @@ textarea:focus {
 #boxes {
   @apply bg-slate-800
 }
+
+#back {
+  @apply bg-white text-slate-800 px-2 py-1 rounded-xl hover:scale-105 shadow-lg
+}

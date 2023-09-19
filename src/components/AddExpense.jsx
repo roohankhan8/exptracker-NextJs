@@ -1,8 +1,8 @@
 'use client'
 import axios from "axios"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSession } from "next-auth/react"
 import { showToastMessage } from "@/helpers";

@@ -154,6 +154,13 @@ const Expenses = () => {
             </div> */}
             {expenses.length > 0 ? (
                 <>
+                <div className="m-2">
+                    <Link href='/charts' className="">
+                        <button className="w-full bg-sky-900 text-lg p-2 rounded-lg shadow-md hover:shadow-black">
+                            <span>Charts </span>
+                        </button>
+                    </Link>
+                </div>
                     {expenses && (
                         <GetTotal expenses={expenses} />
                     )}
@@ -163,7 +170,7 @@ const Expenses = () => {
                                 {expense.category == 'expense' ? (
                                     <tr key={expense._id} className=" text-sm">
                                         <td className="" >{expense?.typeOfExp}</td>
-                                        <td>Rs.{expense?.amount}</td>
+                                        <td>{expense?.amount}</td>
                                         <td>{dateFormat(expense.dateCreated)}</td>
                                         <td className="flex justify-around items-center">
                                             <button className="text-sm" onClick={() => openPopup(expense)}>
@@ -190,7 +197,7 @@ const Expenses = () => {
                                 {expense.category == 'income' ? (
                                     <tr key={expense._id} className=" text-sm">
                                         <td className="" >{expense?.typeOfExp}</td>
-                                        <td>Rs.{expense?.amount}</td>
+                                        <td>{expense?.amount}</td>
                                         <td>{dateFormat(expense.dateCreated)}</td>
                                         <td className="flex justify-around items-center">
                                             <button className="text-sm" onClick={() => openPopup(expense)}>
