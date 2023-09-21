@@ -1,3 +1,4 @@
+import Provider from "./Provider";
 import AddExpense from "./AddExpense";
 import Expenses from "./Expenses";
 import PieChart from "./PieChart";
@@ -11,6 +12,7 @@ import Charts from "./Charts";
 
 export {
   AddExpense,
+  Provider,
   Expenses,
   PieChart,
   GetTotal,
