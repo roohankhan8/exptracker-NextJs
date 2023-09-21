@@ -2,7 +2,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ShowType } from ".";
 
-const AddExpense = ({
+const Form = ({
+    name,
     switchType,
     editExp,
     seteditExp,
@@ -12,7 +13,7 @@ const AddExpense = ({
     return (
         <div className="flex justify-center items-center h-screen">
             <div className="flex bg-slate-900 flex-col items-center justify-center p-2" id="addExpContainer" >
-                <h1 className="text-2xl font-bold my-2">Add Expense</h1>
+                <h1 className="text-2xl font-bold my-2">{name} Expense</h1>
                 <select name="category" id="category" className="border-2 p-2 w-full" onChange={(e) => switchType(e.target.value)}>
                     <option value="editExpense">Expense</option>
                     <option value="income">Income</option>
@@ -35,4 +36,4 @@ const AddExpense = ({
     )
 }
 
-export default AddExpense
+export default Form
