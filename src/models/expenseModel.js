@@ -24,9 +24,6 @@ const expSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  //   updatedAt: {
-  //     type: Date,
-  //   },
 });
 
 const Expense = mongoose.models.exps || mongoose.model("exps", expSchema);

@@ -3,7 +3,8 @@ import { useSession, signIn } from "next-auth/react";
 import { Expenses, Navbar } from "@/components";
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { dateFormat, showToastMessage } from '@/helpers'
+import { showToastMessage } from '@/helpers'
+import Link from "next/link"
 
 export default function Home() {
   const { data: session } = useSession();
@@ -54,86 +55,6 @@ export default function Home() {
       seteditExp(prevExp => ({ ...prevExp, category: e, typeOfExp: "food" }))
     }
   }
-  // const showType = () => {
-  //   if (editExp.category == '' || editExp.category == 'expense') {
-  //     return (
-  //       <>
-  //         <div>
-  //           <input
-  //             type="radio"
-  //             id="food"
-  //             name="typeOfExp"
-  //             value="food"
-  //             checked={editExp.typeOfExp === "food"}
-  //             onChange={(e) => { seteditExp({ ...editExp, typeOfExp: e.target.value }) }}
-  //           />
-  //           <label htmlFor="food">Food</label>
-  //         </div>
-  //         <div>
-  //           <input
-  //             type="radio"
-  //             id="transportation"
-  //             name="typeOfExp"
-  //             value="transportation"
-  //             checked={editExp.typeOfExp === "transportation"}
-  //             onChange={(e) => { seteditExp({ ...editExp, typeOfExp: e.target.value }) }}
-  //           />
-  //           <label htmlFor="transportation">Transportation</label>
-  //         </div>
-  //         <div>
-  //           <input
-  //             type="radio"
-  //             id="others"
-  //             name="typeOfExp"
-  //             value="others"
-  //             checked={editExp.typeOfExp === "others"}
-  //             onChange={(e) => { seteditExp({ ...editExp, typeOfExp: e.target.value }) }}
-  //           />
-  //           <label htmlFor="others">Others</label>
-  //         </div>
-  //       </>
-  //     )
-  //   }
-  //   else {
-  //     return (
-  //       <>
-  //         <div>
-  //           <input
-  //             type="radio"
-  //             id="salary"
-  //             name="typeOfExp"
-  //             value="salary"
-  //             checked={editExp.typeOfExp === "salary"}
-  //             onChange={(e) => { seteditExp({ ...editExp, typeOfExp: e.target.value }) }}
-  //           />
-  //           <label htmlFor="salary">Salary</label>
-  //         </div>
-  //         <div>
-  //           <input
-  //             type="radio"
-  //             id="bonus"
-  //             name="typeOfExp"
-  //             value="bonus"
-  //             checked={editExp.typeOfExp === "bonus"}
-  //             onChange={(e) => { seteditExp({ ...editExp, typeOfExp: e.target.value }) }}
-  //           />
-  //           <label htmlFor="bonus">Bonus</label>
-  //         </div>
-  //         <div>
-  //           <input
-  //             type="radio"
-  //             id="allowance"
-  //             name="typeOfExp"
-  //             value="allowance"
-  //             checked={editExp.typeOfExp === "allowance"}
-  //             onChange={(e) => { seteditExp({ ...editExp, typeOfExp: e.target.value }) }}
-  //           />
-  //           <label htmlFor="allowance">Allowance</label>
-  //         </div>
-  //       </>
-  //     )
-  //   }
-  // }
   if (!session) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -148,21 +69,36 @@ export default function Home() {
   }
   return (
     <>
-    <Navbar image={session.user.image} />
-      <Expenses
-        session={session}
-        expenses={expenses}
-        editExp={editExp}
-        getExpenses={getExpenses}
-        updateNoteHandler={updateNoteHandler}
-        deleteExp={deleteExp}
-        openPopup={openPopup}
-        switchType={switchType}
-        // showType={showType}
-        isPopupOpen={isPopupOpen}
-        setIsPopupOpen={setIsPopupOpen}
-        seteditExp={seteditExp}
-      />
+      <Navbar image={session.user.image} />
+      <div className="m-2">
+        <Link href='/addExpense' className="">
+          <button className="w-full bg-slate-900 text-lg p-2 rounded-lg shadow-md hover:shadow-black">
+            <span>Add Expense </span>
+            +
+          </button>
+        </Link>
+      </div>
+      {expenses.length > 0 ? (
+        <Expenses
+          session={session}
+          expenses={expenses}
+          editExp={editExp}
+          getExpenses={getExpenses}
+          updateNoteHandler={updateNoteHandler}
+          deleteExp={deleteExp}
+          openPopup={openPopup}
+          switchType={switchType}
+          isPopupOpen={isPopupOpen}
+          setIsPopupOpen={setIsPopupOpen}
+          seteditExp={seteditExp}
+        />
+      ) : (
+        <>
+          <div className="my-44 flex justify-center items-center text-2xl font-bold">
+            No Expenses Yet, Add yours!
+          </div>
+        </>
+      )}
     </>
   );
 }

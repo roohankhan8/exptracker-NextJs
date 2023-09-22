@@ -1,5 +1,5 @@
 
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const showToastMessage = (action) => {
     if (action == 'delete') {
