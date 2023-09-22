@@ -65,3 +65,10 @@ textarea:focus {
 #back {
   @apply bg-white text-slate-800 px-2 py-1 rounded-xl hover:scale-105 shadow-lg
 }
+
+/* styles/TextCarousel.module.css */
+.text-carousel {
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px;
+}

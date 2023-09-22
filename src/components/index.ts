@@ -10,6 +10,7 @@ import Navbar from "./Navbar";
 import Months from "./Months";
 import Charts from "./Charts";
 import ShowType from "./ShowType";
+import TextCarousel from "./TextCarousel";
 
 export {
   AddExpense,
@@ -23,5 +24,5 @@ export {
   Navbar,
   Months,
   Charts,
-  ShowType,
+  ShowType,TextCarousel
 };

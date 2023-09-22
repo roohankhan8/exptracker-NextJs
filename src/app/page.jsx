@@ -1,6 +1,6 @@
 "use client";
 import { useSession, signIn } from "next-auth/react";
-import { Expenses, Navbar } from "@/components";
+import { Expenses, Navbar, TextCarousel } from "@/components";
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { showToastMessage } from '@/helpers'
@@ -67,6 +67,20 @@ export default function Home() {
       </div>
     );
   }
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
   return (
     <>
       <Navbar image={session.user.image} />
@@ -78,7 +92,12 @@ export default function Home() {
           </button>
         </Link>
       </div>
-      {expenses.length > 0 ? (
+      <div className="m-2">
+        <div className=" bg-slate-900 w-full text-lg rounded-lg">
+          <TextCarousel months={months} className="" />
+        </div>
+      </div>
+      {expenses && (
         <Expenses
           session={session}
           expenses={expenses}
@@ -92,12 +111,6 @@ export default function Home() {
           setIsPopupOpen={setIsPopupOpen}
           seteditExp={seteditExp}
         />
-      ) : (
-        <>
-          <div className="my-44 flex justify-center items-center text-2xl font-bold">
-            No Expenses Yet, Add yours!
-          </div>
-        </>
       )}
     </>
   );
