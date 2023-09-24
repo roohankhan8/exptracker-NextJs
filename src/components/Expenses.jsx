@@ -15,7 +15,7 @@ const Expenses = ({ expenses, editExp, getExpenses, updateNoteHandler, deleteExp
                 <>
                     <div className="m-2">
                         <Link href='/charts' className="">
-                            <button className="w-full bg-sky-900 text-lg p-2 rounded-lg shadow-md hover:shadow-black">
+                            <button className="w-full bg-sky-800 text-lg p-2 rounded-lg shadow-md hover:shadow-black">
                                 <span>Charts</span>
                             </button>
                         </Link>
@@ -27,7 +27,7 @@ const Expenses = ({ expenses, editExp, getExpenses, updateNoteHandler, deleteExp
                 </>
             ) : (
                 <>
-                    <div className="my-44 flex justify-center items-center text-2xl font-bold">
+                    <div className="my-48 flex justify-center items-center text-2xl font-bold">
                         No Expenses Yet, Add yours!
                     </div>
                 </>

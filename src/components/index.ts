@@ -7,10 +7,10 @@ import ExpensesTable from "./ExpensesTable";
 import Popup from "./PopUp";
 import Logout from "./Logout";
 import Navbar from "./Navbar";
-import Months from "./Months";
 import Charts from "./Charts";
 import ShowType from "./ShowType";
 import TextCarousel from "./TextCarousel";
+import BarChart from "./BarChart";
 
 export {
   AddExpense,
@@ -22,7 +22,8 @@ export {
   Popup,
   Logout,
   Navbar,
-  Months,
   Charts,
-  ShowType,TextCarousel
+  ShowType,
+  TextCarousel,
+  BarChart,
 };

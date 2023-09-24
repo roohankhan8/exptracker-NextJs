@@ -1,6 +1,6 @@
 import { ShowType } from ".";
 
-const Popup = ({ isOpen, editExp, showType, switchType, updateNoteHandler, setIsPopupOpen, seteditExp }) => {
+const Popup = ({ isOpen, editExp, switchType, updateNoteHandler, setIsPopupOpen, seteditExp }) => {
   if (!isOpen) return null;
   return (
     <div className="popup-overlay">

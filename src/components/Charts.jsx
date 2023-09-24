@@ -4,7 +4,6 @@ const Charts = ({expenses}) => {
     let foodTotal = 0
     let transportationTotal = 0
     let othersTotal = 0
-    console.log(expenses)
     for (let i in expenses) {
         if (expenses[i].typeOfExp == 'food') {
             foodTotal += parseInt((expenses[i].amount))
@@ -19,10 +18,10 @@ const Charts = ({expenses}) => {
     const data = {
         labels: ["Food", "Transportation", "Others"],
         values: [foodTotal, transportationTotal, othersTotal],
-        colors: ["#FF5733", "#33FF57", "#5733FF"],
+        colors: ["#082082", "#cfd8fc", "#0e3bf1"],
     };
     let total = foodTotal + transportationTotal + othersTotal
-    console.log(total)
+    // console.log(total)
     if (total > 0) {
         return (<>
             <div className="h-screen w-full flex items-center justify-center">
@@ -32,7 +31,7 @@ const Charts = ({expenses}) => {
         );
     } else {
         return (
-            <div className="h-screen text-3xl font-bold w-full flex items-center justify-center">Loading...</div>
+            <div className="h-screen text-3xl font-bold w-full flex items-center justify-center">No expenses this month!</div>
         )
     }
 }

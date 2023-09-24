@@ -1,12 +1,19 @@
 import { Logout } from '.'
 import Image from 'next/image'
+import Link from 'next/link'
 
-const Navbar = ({image}) => {
+const Navbar = ({ page, image }) => {
     return (
-        <div className=' bg-slate-800'>
+        <div id='sticky_header'>
             <div className="flex justify-between items-center p-2">
-                <Logout />
-                <h1 className=' text-xl font-bold' >Expense Tracker</h1>
+                {page == 'Tracker' ? (
+                    <Logout />
+                ) : (
+                    <Link href='/' id="back">
+                        Back
+                    </Link>
+                )}
+                <h1 className=' text-xl font-bold' >Expense {page}</h1>
                 <Image src={image} alt="profile pic" width={50} height={50} className="rounded-full" />
             </div>
         </div>

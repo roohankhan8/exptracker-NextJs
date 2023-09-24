@@ -2,37 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-#flex {
-  @apply flex justify-center items-center;
-}
-
-tr > td,
-tr > th {
-  @apply p-1.5;
-}
-#addExpContainer {
-  @apply shadow-lg shadow-black rounded-lg p-10;
-}
-
-#addExpContainer input,
-#addExpContainer textarea,
-#addExpContainer select,
-.popup input,
-.popup textarea,
-.popup select {
-  @apply rounded-lg my-2 text-slate-900;
-}
-
-#options button {
-  @apply text-white p-2 rounded-lg shadow-md hover:shadow-black hover:scale-105;
-}
-
-.popup {
-  @apply bg-slate-900 text-white rounded-xl;
-}
-.popup-overlay {
-  @apply rounded-xl flex items-center justify-center fixed;
-}
 
 .popup-overlay {
   top: 0;
@@ -47,6 +16,41 @@ tr > th {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   position: relative;
 }
+.popup {
+  @apply bg-slate-900 text-white rounded-xl;
+}
+.popup-overlay {
+  @apply rounded-xl flex items-center justify-center fixed;
+}
+
+tr > td,
+tr > th {
+  @apply p-1.5;
+}
+
+
+#addExpContainer {
+  @apply shadow-lg shadow-black rounded-lg p-10;
+}
+
+#addExpContainer input,
+#addExpContainer textarea,
+#addExpContainer select,
+.popup input,
+.popup textarea,
+.popup select {
+  @apply rounded-lg my-2 bg-transparent text-white border
+}
+
+select option {
+  @apply bg-slate-900 text-white text-base
+}
+
+#options button {
+  @apply text-white p-2 rounded-lg shadow-md hover:shadow-black hover:scale-105;
+}
+
+
 
 #radioTypes div input {
   @apply m-1;
@@ -59,16 +63,16 @@ textarea:focus {
 }
 
 #boxes {
-  @apply bg-slate-800
+  @apply bg-blue-950
 }
 
 #back {
-  @apply bg-white text-slate-800 px-2 py-1 rounded-xl hover:scale-105 shadow-lg
+  @apply bg-white text-slate-800 px-2 py-1 rounded-xl hover:scale-105 shadow-lg;
 }
 
-/* styles/TextCarousel.module.css */
-.text-carousel {
-  text-align: center;
-  padding: 20px;
-  border-radius: 5px;
+#sticky_header {
+  @apply sticky top-0 z-10 bg-slate-800 backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-slate-700;
+}
+#gradient {
+  @apply bg-gradient-to-t from-blue-700 via-blue-800 to-gray-800
 }

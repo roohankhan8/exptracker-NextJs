@@ -2,14 +2,16 @@
 import { useSession, signIn } from "next-auth/react";
 import { Expenses, Navbar, TextCarousel } from "@/components";
 import { useState, useEffect } from "react"
-import axios from "axios"
 import { showToastMessage } from '@/helpers'
 import Link from "next/link"
+import axios from "axios"
 
 export default function Home() {
   const { data: session } = useSession();
   const [expenses, setexpenses] = useState([])
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [editExp, seteditExp] = useState({
     category: 'expense',
     typeOfExp: 'food',
@@ -23,6 +25,11 @@ export default function Home() {
     const res = await axios.get(`/api/exps?userEmail=${session?.user?.email}`)
     setexpenses(res.data.data)
   }
+  const filteredExpenses = expenses.filter((expense) => {
+    const expenseDate = new Date(expense.dateCreated);
+    return expenseDate.getMonth() === selectedMonth &&
+      expenseDate.getFullYear() === selectedYear
+  });
   const deleteExp = async (_id) => {
     try {
       const res = await axios.delete(
@@ -67,40 +74,28 @@ export default function Home() {
       </div>
     );
   }
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
   return (
     <>
-      <Navbar image={session.user.image} />
+      <Navbar
+      page={'Tracker'}
+      image={session.user.image} />
+      <div className="m-2">
+        <div className=" bg-slate-900 w-full text-lg rounded-lg">
+          <TextCarousel setSelectedYear={setSelectedYear} setSelectedMonth={setSelectedMonth} className="" />
+        </div>
+      </div>
       <div className="m-2">
         <Link href='/addExpense' className="">
-          <button className="w-full bg-slate-900 text-lg p-2 rounded-lg shadow-md hover:shadow-black">
+          <button className="w-full bg-sky-700 text-lg p-2 rounded-lg shadow-md hover:shadow-black">
             <span>Add Expense </span>
             +
           </button>
         </Link>
       </div>
-      <div className="m-2">
-        <div className=" bg-slate-900 w-full text-lg rounded-lg">
-          <TextCarousel months={months} className="" />
-        </div>
-      </div>
       {expenses && (
         <Expenses
           session={session}
-          expenses={expenses}
+          expenses={filteredExpenses}
           editExp={editExp}
           getExpenses={getExpenses}
           updateNoteHandler={updateNoteHandler}

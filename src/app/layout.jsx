@@ -12,7 +12,7 @@ export const metadeta={
 export default function RootLayout({children}) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-slate-700 text-white`}>
+      <body className={`${inter.className} text-white`} id='gradient'>
         <Provider>
           {children}
         </Provider>

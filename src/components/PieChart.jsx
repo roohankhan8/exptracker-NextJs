@@ -19,6 +19,16 @@ function PieChart({ data }) {
             },
           ],
         },
+        options: {
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                color: 'white', // Set label text color
+              },
+            },
+          },
+        },
       });
     }
   }, []);

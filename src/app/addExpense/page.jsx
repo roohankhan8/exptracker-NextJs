@@ -18,8 +18,8 @@ const NewExpense = () => {
     })
     const addExpense = async () => {
         if (session && editExp.amount > 0) {
-            const res = await axios.post('/api/addexp', editExp)
             showToastMessage('add')
+            const res = await axios.post('/api/addexp', editExp)
             router.push('/')
         } else if (!session) {
 
