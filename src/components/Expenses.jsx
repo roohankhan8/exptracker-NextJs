@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Expenses = ({ expenses, editExp, getExpenses, updateNoteHandler, deleteExp, openPopup, switchType, isPopupOpen, setIsPopupOpen, seteditExp }) => {
     useEffect(() => {
         getExpenses()
-    }, [])
+    }, [getExpenses])
     return (
         <>
             {expenses.length > 0 ? (
