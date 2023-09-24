@@ -1,6 +1,6 @@
 import { PieChart } from "@/components";
 
-const Charts = ({expenses}) => {
+const Charts = ({ expenses }) => {
     let foodTotal = 0
     let transportationTotal = 0
     let othersTotal = 0
@@ -21,19 +21,21 @@ const Charts = ({expenses}) => {
         colors: ["#082082", "#cfd8fc", "#0e3bf1"],
     };
     let total = foodTotal + transportationTotal + othersTotal
-    // console.log(total)
-    if (total > 0) {
-        return (<>
-            <div className="h-screen w-full flex items-center justify-center">
-                <PieChart data={data} />
-            </div>
+    console.log(total)
+    return (
+        <>
+            {
+                total > 0 ? (
+                    <div className="w-full flex items-center justify-center">
+                        <PieChart data={data} className='border-2' />
+                    </div>
+                ) : (
+                    <div className="h-screen text-3xl font-bold w-full flex items-center justify-center">No expenses this month!</div>
+
+                )
+            }
         </>
-        );
-    } else {
-        return (
-            <div className="h-screen text-3xl font-bold w-full flex items-center justify-center">No expenses this month!</div>
-        )
-    }
+    )
 }
 
 export default Charts

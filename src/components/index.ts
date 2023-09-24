@@ -10,7 +10,7 @@ import Navbar from "./Navbar";
 import Charts from "./Charts";
 import ShowType from "./ShowType";
 import TextCarousel from "./TextCarousel";
-import BarChart from "./BarChart";
+import SearchBar from './SearchBar'
 
 export {
   AddExpense,
@@ -24,6 +24,5 @@ export {
   Navbar,
   Charts,
   ShowType,
-  TextCarousel,
-  BarChart,
+  TextCarousel,SearchBar,
 };

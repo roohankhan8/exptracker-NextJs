@@ -76,3 +76,10 @@ textarea:focus {
 #gradient {
   @apply bg-gradient-to-t from-blue-700 via-blue-800 to-gray-800
 }
+.search_input {
+  @apply w-[90%] p-2 text-black rounded-md border border-gray-200 bg-white text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0
+}
+
+#option_buttons{
+ @apply bg-sky-800 w-[40%] text-center text-lg p-2 rounded-lg shadow-md hover:shadow-black
+}

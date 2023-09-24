@@ -77,8 +77,8 @@ export default function Home() {
   return (
     <>
       <Navbar
-      page={'Tracker'}
-      image={session.user.image} />
+        page={'Tracker'}
+        image={session.user.image} />
       <div className="m-2">
         <div className=" bg-slate-900 w-full text-lg rounded-lg">
           <TextCarousel setSelectedYear={setSelectedYear} setSelectedMonth={setSelectedMonth} className="" />

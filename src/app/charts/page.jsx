@@ -1,10 +1,9 @@
 "use client";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { TextCarousel, Navbar } from "@/components";
+import { TextCarousel, Navbar, GetTotal } from "@/components";
 import { useSession } from "next-auth/react"
 import { Charts } from "@/components"
-import Link from 'next/link'
 
 const ChartsPage = () => {
   const { data: session } = useSession();
@@ -23,46 +22,22 @@ const ChartsPage = () => {
     return expenseDate.getMonth() === selectedMonth &&
       expenseDate.getFullYear() === selectedYear
   });
-  // const data = {
-  //   labels: ['January', 'February', 'March', 'April', 'May'],
-  //   datasets: [
-  //     {
-  //       label: 'Monthly Expenses',
-  //       data: [12, 19, 3, 5, 2],
-  //       backgroundColor: ['rgba(255, 99, 132, 0.2)'],
-  //       borderColor: ['rgba(255, 99, 132, 1)'],
-  //       borderWidth: 1,
-  //     },
-  //   ],
-  // };
-
-  // const options = {
-  //   scales: {
-  //     y: {
-  //       beginAtZero: true,
-  //     },
-  //   },
-  // };
+  console.log(filteredExpenses)
   return (
     <div>
-      <Navbar 
-      page={'Chart'}
-      image={session?.user?.image} 
+      <Navbar
+        page={'Chart'}
+        image={session?.user?.image}
       />
       <div className="m-2">
         <div className=" bg-slate-900 w-full text-lg rounded-lg">
           <TextCarousel setSelectedYear={setSelectedYear} setSelectedMonth={setSelectedMonth} className="" />
         </div>
       </div>
-      {/* <BarChart data={data} options={options} /> */}
-      {expenses != [] ? (
-        <Charts
-          expenses={filteredExpenses}
-        />
-      ) : (
-        <></>
-      )}
-
+      <GetTotal expenses={filteredExpenses} />
+      <Charts
+        expenses={filteredExpenses}
+      />
     </div>
   )
 }
