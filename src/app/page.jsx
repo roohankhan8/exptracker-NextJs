@@ -92,6 +92,14 @@ export default function Home() {
           </button>
         </Link>
       </div>
+      <div className="m-2 p-2 flex justify-around items-center">
+        <Link href='/reports' id='option_buttons'>
+          Reports
+        </Link>
+        <Link href='/charts' id='option_buttons'>
+          Charts
+        </Link>
+      </div>
       {expenses && (
         <Expenses
           session={session}

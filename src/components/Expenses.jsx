@@ -5,17 +5,17 @@ import { ExpensesTable, GetTotal, Popup, SearchBar } from "."
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Expenses = ({ 
-    expenses, 
-    editExp, 
-    getExpenses, 
-    updateNoteHandler, 
-    deleteExp, 
-    openPopup, 
-    switchType, 
-    isPopupOpen, 
-    setIsPopupOpen, 
-    seteditExp 
+const Expenses = ({
+    expenses,
+    editExp,
+    getExpenses,
+    updateNoteHandler,
+    deleteExp,
+    openPopup,
+    switchType,
+    isPopupOpen,
+    setIsPopupOpen,
+    seteditExp
 }) => {
     const [searchText, setSearchText] = useState("");
     const [searchedResults, setSearchedResults] = useState([]);
@@ -26,15 +26,11 @@ const Expenses = ({
         <>
             {expenses.length > 0 ? (
                 <>
-                    <div className="m-2 p-2 flex justify-around items-center">
-                        <Link href='/reports' id='option_buttons'>
-                            Reports
-                        </Link>
-                        <Link href='/charts' id='option_buttons'>
-                            Charts
-                        </Link>
+                    <div className="flex justify-center">
+                        <div className="sm:w-[50%] w-full">
+                            <GetTotal expenses={expenses} />
+                        </div>
                     </div>
-                    <GetTotal expenses={expenses} />
                     <SearchBar
                         expenses={expenses}
                         searchText={searchText}
@@ -42,15 +38,15 @@ const Expenses = ({
                         setSearchedResults={setSearchedResults}
                     />
                     {searchText ? (
-                        <>
+                        <div className='sm:flex'>
                             <ExpensesTable expenses={searchedResults} category={"expense"} title={'Expenses'} deleteExp={deleteExp} openPopup={openPopup} />
                             <ExpensesTable expenses={searchedResults} category={"income"} title={'Incomes'} deleteExp={deleteExp} openPopup={openPopup} />
-                        </>
+                        </div>
                     ) : (
-                        <>
+                        <div className='sm:flex'>
                             <ExpensesTable expenses={expenses} category={"expense"} title={'Expenses'} deleteExp={deleteExp} openPopup={openPopup} />
                             <ExpensesTable expenses={expenses} category={"income"} title={'Incomes'} deleteExp={deleteExp} openPopup={openPopup} />
-                        </>
+                        </div>
                     )}
                     <Popup isOpen={isPopupOpen} editExp={editExp} switchType={switchType} updateNoteHandler={updateNoteHandler} setIsPopupOpen={setIsPopupOpen} seteditExp={seteditExp} />
                 </>
