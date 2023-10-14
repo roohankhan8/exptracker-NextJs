@@ -1,5 +1,5 @@
 "use client";
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { Expenses, Navbar, TextCarousel } from "@/components";
 import { useState, useEffect } from "react"
 import { showToastMessage } from '@/helpers'
@@ -62,23 +62,11 @@ export default function Home() {
       seteditExp(prevExp => ({ ...prevExp, category: e, typeOfExp: "food" }))
     }
   }
-  if (!session) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <button
-          onClick={() => signIn("google")}
-          className="bg-white text-slate-800 px-2 py-1 rounded-xl hover:scale-105 shadow-lg"
-        >
-          Login With Google
-        </button>
-      </div>
-    );
-  }
   return (
     <>
       <Navbar
         page={'Tracker'}
-        image={session.user.image} />
+        image={session?.user?.image} />
       <div className="m-2">
         <div className=" bg-slate-900 w-full text-lg rounded-lg">
           <TextCarousel setSelectedYear={setSelectedYear} setSelectedMonth={setSelectedMonth} className="" />

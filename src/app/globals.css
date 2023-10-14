@@ -41,6 +41,16 @@ tr > th {
 .popup select {
   @apply rounded-lg my-2 bg-transparent text-white border
 }
+#form{
+  @apply w-[50%] p-10 flex flex-col justify-center items-center bg-slate-900 rounded-lg
+}
+
+#form input{
+  @apply rounded-lg my-2 p-2 border bg-transparent text-sm w-full
+}
+#form button{
+  @apply bg-white my-2 text-slate-800 px-2 py-1 rounded-xl hover:scale-105 shadow-lg w-full
+}
 
 select option {
   @apply bg-slate-900 text-white text-base
