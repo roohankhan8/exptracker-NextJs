@@ -1,4 +1,3 @@
-
 "use client";
 import { useSession, signIn } from "next-auth/react";
 import Link from "next/link"
@@ -26,7 +25,7 @@ const Form = ({ page }) => {
                     className=""
                 >Continue with Google
                 </button>
-                <div className=" text-sm text-gray-300 underline">
+                <div className=" text-center text-sm text-gray-300 underline">
                     {page == 'Login' ? (
                         <Link href='/register'>No account? Register</Link>
                     ) : (

@@ -24,7 +24,7 @@ const ChartsPage = () => {
   });
   console.log(filteredExpenses)
   return (
-    <div>
+    <div className="">
       <Navbar
         page={'Chart'}
         image={session?.user?.image}

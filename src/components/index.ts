@@ -12,6 +12,7 @@ import ShowType from "./ShowType";
 import TextCarousel from "./TextCarousel";
 import SearchBar from './SearchBar'
 import Form from './Form'
+import StoreProvider from './StoreProvider'
 
 export {
   AddExpense,
@@ -25,5 +26,5 @@ export {
   Navbar,
   Charts,
   ShowType,
-  TextCarousel,SearchBar,Form
+  TextCarousel,SearchBar,Form, StoreProvider
 };
